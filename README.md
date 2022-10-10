@@ -5,22 +5,12 @@
 Data loaders for open data
 
 ## Table of Contents
-
-- [Install](#install)
-- [Usage](#usage)
+- [About](#About)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Install
-
-```
-```
-
-## Usage
-
-```
-```
+## About
 
 ## Maintainers
 
