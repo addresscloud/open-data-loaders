@@ -7,9 +7,9 @@ Since 2012, the data collected by environmental health officers for the FSA FHRS
 
 ## Usage 
 
-The data is downloaded as a collection of xml files that are then converted to a single csv files that contains the following buisness name, type, address as well as the latitude and longitude.  
+The data is downloaded as a collection of xml files that are then converted to a single csv file. This contains the following buisness name, type, address as well as the latitude and longitude for each of the properties.  
 
-Run the script using 
+All dependencies should already be installed within your version of python3. Run the script using 
 `python3 fhrs_to_csv.py`
 
 ## To do
