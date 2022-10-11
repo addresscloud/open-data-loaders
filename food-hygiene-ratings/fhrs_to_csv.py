@@ -4,6 +4,9 @@ import requests, json, urllib.request, os
 import xml.etree.ElementTree as ET
 import pandas as pd
 
+if os.path.exists("fhrs_properties.csv"):
+    os.remove("fhrs_properties.csv")
+
 url = 'http://api.ratings.food.gov.uk/Authorities'
 headers={"x-api-version":"2"}
 response =requests.get(url, headers=headers)
@@ -49,7 +52,6 @@ def createCsv(xml):
 
     #build the final dfframe
     df = pd.read_xml(xml, xpath="//EstablishmentDetail")
-    #print(df.columns)
     if not 'AddressLine1' in df:
         df['AddressLine1'] = ''
     if not 'AddressLine2' in df:
@@ -60,17 +62,14 @@ def createCsv(xml):
         df['AddressLine4'] = ''
     if not 'PostCode' in df:
         df['PostCode'] = ''
-    #if 'AddressLine1' in df:
     df['address'] = df[['AddressLine1','AddressLine2', 'AddressLine3','AddressLine4','PostCode']].apply(lambda x: ','.join(x.dropna()), axis=1)
     df['address'].str.lstrip(',')
     df = df[['FHRSID','BusinessName','BusinessType','address']]
-    #print (df)
     df['Latitude']=lat_rows
     df['Longitude']=lon_rows
     df['Hygiene']=hyg_rows
     df['Structual']=struct_rows
     df['confidence']=cim_rows
-    #df= df.drop(columns=['Scores','Geocode'], axis=1)
     output_path='fhrs_properties.csv'
     df.to_csv(output_path, mode='a', header=not os.path.exists(output_path))
 
